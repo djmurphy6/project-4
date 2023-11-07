@@ -3,11 +3,12 @@ Author: Dylan Murphy
 Contact: dmurphy6@uoregon.edu
 
 Description: This is a checkpoint calculator for brevet bike races. It follows the table: 
-Control location (km)	Minimum Speed (km/hr)	Maximum Speed (km/hr)
-	0 - 200						15							34
-	200 - 400					15							32
-	400 - 600					15							30
-	600 - 1000				11.428							28
+| Control Location (km) | Minimum Speed (km/hr) | Maximum Speed (km/hr) |
+|-----------------------|-----------------------|-----------------------|
+| 0 - 200               | 15                    | 34                    |
+| 200 - 400             | 15                    | 32                    |
+| 400 - 600             | 15                    | 30                    |
+| 600 - 1000            | 11.428                | 28                    |
 
 and has a special case for checkpoints within the first 60km where the close time is a 20 km/hr minimum speed + 1 hr. The maximum distance for the last checkpoint is 120% the brevet distance and if you type in a number that exceeds that it will automatically default to 120% * the brevet distance. The page updates as you type in values without reloading the page by using AJAX. 
 
