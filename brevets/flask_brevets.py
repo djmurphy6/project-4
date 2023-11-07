@@ -61,6 +61,9 @@ def _calc_times():
     dist = flask.request.args.get("dist", type=int)
     app.logger.debug("dist={}".format(dist))
 
+    # if checkpoint is further than distance, set km to distance
+    if km > dist:
+        km = dist
 
     app.logger.debug("request.args: {}".format(request.args))
     

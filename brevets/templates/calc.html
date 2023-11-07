@@ -128,8 +128,6 @@
                
                // check to see if checkpoint is over 20% further than total brevet dist
                if(km > 1.2 * dist) {
-                  km = 1.2 * dist;
-                  console.log("km = " + km)
                   control.find("input[name='km']").val(1.2 * dist);
                }
 

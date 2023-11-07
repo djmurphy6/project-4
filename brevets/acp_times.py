@@ -30,9 +30,6 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
 
     num = control_dist_km
     sum = 0.0
-    if num > 1000 and num <= 1300:
-       sum += ((num-1000)/26)
-       num = 1000
     if num > 600 and num <= 1000:
        sum += ((num-600)/28)
        num = 600
@@ -44,7 +41,6 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
        num = 200
     if num > 0 and num <= 200:
        sum += ((num)/34)
-       num = 0
     
     hrs = math.floor(sum)
     min = int(round((sum - math.floor(sum))*60, 0))
@@ -77,4 +73,21 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
        This will be in the same time zone as the brevet start time.
     """
     close = arrow.get(brevet_start_time)
-    return close#.shift(hours =+ hrs, minutes =+ min)
+
+    num = control_dist_km
+    sum = 0.0
+    if num < 60:
+       sum = (num/20) + 1
+    else:
+      if num > 600 and num <= 1000:
+         sum += ((num-600)/11.428)
+         num = 600
+      if num > 0 and num <= 600:
+         sum += (num/15)
+      if num == 0:
+         sum = 1
+    
+    hrs = math.floor(sum)
+    min = int(round((sum - math.floor(sum))*60, 0))
+
+    return close.shift(hours =+ hrs, minutes =+ min)
