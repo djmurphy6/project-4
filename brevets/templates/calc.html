@@ -120,11 +120,16 @@
             // you need to pass much more!
             // View flask_brevets.py for details.
             function calc_times(control) {
-              var km = control.find("input[name='km']").val();
+               var dist = $("#brevet_dist_km").val();
+               console.log("dist = " + dist)
+               var time = $("#begin_date").val();
+               console.log("time = " + time)
+               var km = control.find("input[name='km']").val();
+
               var open_time_field = control.find("input[name='open']");
               var close_time_field = control.find("input[name='close']");
 
-              $.getJSON(TIME_CALC_URL, {km: km}).done(
+              $.getJSON(TIME_CALC_URL, {km: km, time: time, dist: dist}).done(
                 function(data) {
                    var times = data.result;
                    console.log("Got a response: ");

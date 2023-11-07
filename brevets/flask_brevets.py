@@ -52,13 +52,25 @@ def _calc_times():
     app.logger.debug("Got a JSON request")
     km = request.args.get('km', 999, type=float)
     app.logger.debug("km={}".format(km))
+
+    # get starting time
+    time = request.args.get('time', type = str)
+    app.logger.debug("time={}".format(time))
+
+    # get brevet distance
+    dist = flask.request.args.get("dist", type=int)
+    app.logger.debug("dist={}".format(dist))
+
     app.logger.debug("request.args: {}".format(request.args))
     # FIXME!
     # Right now, only the current time is passed as the start time
     # and control distance is fixed to 200
     # You should get these from the webpage!
-    open_time = acp_times.open_time(km, 200, arrow.now().isoformat).format('YYYY-MM-DDTHH:mm')
-    close_time = acp_times.close_time(km, 200, arrow.now().isoformat).format('YYYY-MM-DDTHH:mm')
+
+    app.logger.debug("arrow.now(): {}".format(arrow.now()))
+
+    open_time = acp_times.open_time(km, dist, time).format('YYYY-MM-DDTHH:mm')
+    close_time = acp_times.close_time(km, dist, arrow.now().isoformat).format('YYYY-MM-DDTHH:mm')
     result = {"open": open_time, "close": close_time}
     return flask.jsonify(result=result)
 
