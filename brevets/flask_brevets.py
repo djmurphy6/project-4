@@ -62,7 +62,7 @@ def _calc_times():
     app.logger.debug("dist={}".format(dist))
 
     # if checkpoint is further than distance, set km to distance
-    # if km > dist:
+    #  if km > dist:
     #    km = dist
 
     app.logger.debug("request.args: {}".format(request.args))
