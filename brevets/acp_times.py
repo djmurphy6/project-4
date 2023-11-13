@@ -14,22 +14,17 @@ import arrow, math
 
 
 def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
-    """
-    Args:
-       control_dist_km:  number, control distance in kilometers
-       brevet_dist_km: number, nominal distance of the brevet
-           in kilometers, which must be one of 200, 300, 400, 600,
-           or 1000 (the only official ACP brevet distances)
-       brevet_start_time:  An arrow object
-    Returns:
-       An arrow object indicating the control open time.
-       This will be in the same time zone as the brevet start time.
-    """
-
-    start = arrow.get(brevet_start_time)
-
+    start = arrow.get(brevet_start_time)     # start time
     num = control_dist_km
     sum = 0.0
+
+    # if checkpoint is further than brevet distance
+    if num > brevet_dist_km:
+       num = brevet_dist_km         
+      # set num to brevet distance, time should be for brevet distance in this case
+
+   # the idea of these if statements is to go by 200km segments, 
+   # working from the top down   
     if num > 600 and num <= 1000:
        sum += ((num-600)/28)
        num = 600
@@ -42,22 +37,11 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     if num > 0 and num <= 200:
        sum += ((num)/34)
     
+    # calculate hours and minutes to shift time by
     hrs = math.floor(sum)
     min = int(round((sum - math.floor(sum))*60, 0))
    
     return start.shift(hours=+hrs, minutes =+ min)
-
-
-   
-   # outline
-   # if distance is 0-200, max speed is 34 km/h
-         # so, distance/34 is the time
-   # if distance 200-400, max speed is 32
-            # greater than 200 so do 200/34 + (distance-200)/32
-   # if distance 400-600 max is 30
-            # time for first 200 +time for 
-
-
 
 
 def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
@@ -76,6 +60,12 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
 
     num = control_dist_km
     sum = 0.0
+
+    # if checkpoint is further than brevet distance
+    if num > brevet_dist_km:
+       num = brevet_dist_km         
+      # set num to brevet distance, time should be for brevet distance in this case
+      
     if num < 60:
        sum = (num/20) + 1
     else:

@@ -19,10 +19,10 @@ logging.basicConfig(format='%(levelname)s:%(message)s',
                     level=logging.WARNING)
 log = logging.getLogger(__name__)
 
-def test_open_100():
+def test_open_1150():
     start_time = arrow.get("2023-11-06T00:00:00")
-    expected_open_time = start_time.shift(hours=2, minutes=56)
-    assert open_time(100, 200, start_time) == expected_open_time
+    expected_open_time = start_time.shift(hours=33, minutes=5)
+    assert open_time(1150, 1000, start_time) == expected_open_time
 
 def test_open_200():
     start_time = arrow.get("2023-11-06T00:00:00")
@@ -39,10 +39,10 @@ def test_open_150():
     expected_open_time = start_time.shift(hours=4, minutes=25)
     assert open_time(150, 300, start_time) == expected_open_time
 
-def test_open_400():
+def test_open_450():
     start_time = arrow.get("2023-11-06T00:00:00")
     expected_open_time = start_time.shift(hours=12, minutes=8)
-    assert open_time(400, 400, start_time) == expected_open_time
+    assert open_time(450, 400, start_time) == expected_open_time
 
 def test_close_50():
     start_time = arrow.get("2023-11-06T00:00:00")
